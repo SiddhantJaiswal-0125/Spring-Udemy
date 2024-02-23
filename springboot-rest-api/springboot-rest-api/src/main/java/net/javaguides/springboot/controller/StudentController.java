@@ -17,8 +17,6 @@ public class StudentController {
         return new Student(1, "Siddhant", "Jaiswal");
     }
 
-
-
     //Making a REST API which will return a list of objects
 
     @GetMapping("students")
