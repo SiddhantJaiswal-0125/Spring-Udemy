@@ -2,6 +2,7 @@ package net.javaguides.springboot.controller;
 
 import net.javaguides.springboot.bean.Student;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -103,6 +104,18 @@ public class StudentController {
     {
         return  "Student Deleted Successfully with Id "+studentId;
     }
+
+
+
+    //Response Entity as a Response
+    @GetMapping("studentResponse")
+    public ResponseEntity<Student> getStudentasResponseEntity()
+    {
+
+        Student s1 =  new Student(1, "Siddhant", "Jaiswal");
+        return  new ResponseEntity<>(s1,HttpStatus.OK);
+    }
+
 
 
 }
