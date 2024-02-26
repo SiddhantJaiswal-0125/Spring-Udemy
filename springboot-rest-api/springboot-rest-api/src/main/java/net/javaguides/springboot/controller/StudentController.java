@@ -40,4 +40,16 @@ public class StudentController {
 
         return new Student(studentID, "SIDDHANT ID ", "JAISWAL ID ");
     }
+    //SpringBoot REST API with PathVariable with Multiple Columns
+
+    @GetMapping("students/{id}/{firstName}/{lastName}")
+    public Student studentpathVariableWithdifferentColumn(
+       @PathVariable("id") int studentId,
+       @PathVariable("firstName") String firstName,
+       @PathVariable("lastName") String lastName)
+    {
+
+        return new Student(studentId, firstName, lastName);
+
+    }
 }
