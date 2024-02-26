@@ -1,10 +1,9 @@
 package net.javaguides.springboot.controller;
 
 import net.javaguides.springboot.bean.Student;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.*;
 
 @RestController
@@ -54,7 +53,6 @@ public class StudentController {
 
 
     //Springboot REST API with Request Param
-
     //http://localhost:8080/students/query?id=1
     @GetMapping("students/querychange")
     public Student studentRequestVariable(@RequestParam int id)
@@ -63,7 +61,6 @@ public class StudentController {
     }
 
     //Springboot REST API with Multiple Request Param
-
     //http://localhost:8080/students/query?id=1&firstName=Siddhu&lastName=Jaiswal
     @GetMapping("students/query")
     public Student studentRequestVariableWithMultipleQuery(@RequestParam int id,
@@ -75,6 +72,19 @@ public class StudentController {
     }
 
 
+    //SpringBoot REST API that handles HTTP POST Request
+    //@Post Mapping and @RequestBody
+
+    @PostMapping("students/create")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Student createStudent(@RequestBody Student student)
+    {
+        System.out.println(student.getId());
+        System.out.println(student.getFirstName());
+        System.out.println(student.getLastName());
+        student.setFirstName("NAME CHANGED");
+        return  student;
+    }
 
 
 }
