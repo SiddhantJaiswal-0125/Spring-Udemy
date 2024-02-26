@@ -89,12 +89,19 @@ public class StudentController {
     //Spring Boot rest api that handles HTTP PUT request - updating existing resource
 //    http://localhost:8080/students/1/update
     @PutMapping("students/{id}/update")
-
     public Student updateStudent(@RequestBody Student student, @PathVariable("id") int studentId)
     {
             System.out.println(student.getFirstName());
             System.out.println(student.getLastName());
             return  student;
+    }
+
+    //Spring Boot rest api that handles HTTP DELETE request - updating existing resource
+//    http://localhost:8080/students/1/update
+    @DeleteMapping("students/{id}/delete")
+    public String deleteStudent(@PathVariable("id") int studentId)
+    {
+        return  "Student Deleted Successfully with Id "+studentId;
     }
 
 
