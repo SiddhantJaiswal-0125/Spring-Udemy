@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
+@RequestMapping("students")
 public class StudentController {
 
 
     //htttp://localhost:8080/student
-    @GetMapping("student")
+    @GetMapping("")
     public Student getStudent()
     {
         return new Student(1, "Siddhant", "Jaiswal");
@@ -20,7 +21,7 @@ public class StudentController {
 
     //Making a REST API which will return a list of objects
 
-    @GetMapping("students")
+    @GetMapping("/getall")
     public List<Student> getStudents()
     {
         List<Student> students = new ArrayList<>();
@@ -35,7 +36,7 @@ public class StudentController {
     //{id} - URI template variable
     //http://localhost:8080/student/1
 
-    @GetMapping("students/{id}")
+    @GetMapping("/{id}")
     public Student StudentPathVariable(@PathVariable("id") int studentID)
     {
 
@@ -43,7 +44,7 @@ public class StudentController {
     }
     //SpringBoot REST API with PathVariable with Multiple Columns
 
-    @GetMapping("students/{id}/{firstName}/{lastName}")
+    @GetMapping("/{id}/{firstName}/{lastName}")
     public Student studentpathVariableWithdifferentColumn(@PathVariable("id") int studentId, @PathVariable("firstName") String firstName,
        @PathVariable("lastName") String lastName)
     {
@@ -55,7 +56,7 @@ public class StudentController {
 
     //Springboot REST API with Request Param
     //http://localhost:8080/students/query?id=1
-    @GetMapping("students/querychange")
+    @GetMapping("/querychange")
     public Student studentRequestVariable(@RequestParam int id)
     {
         return new Student(id, "Siddu", "Jaiswal");
@@ -63,7 +64,7 @@ public class StudentController {
 
     //Springboot REST API with Multiple Request Param
     //http://localhost:8080/students/query?id=1&firstName=Siddhu&lastName=Jaiswal
-    @GetMapping("students/query")
+    @GetMapping("/query")
     public Student studentRequestVariableWithMultipleQuery(@RequestParam int id,
                                                            @RequestParam String firstName,
                                                            @RequestParam String lastName)
@@ -76,7 +77,7 @@ public class StudentController {
     //SpringBoot REST API that handles HTTP POST Request
     //@Post Mapping and @RequestBody
 
-    @PostMapping("students/create")
+    @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Student createStudent(@RequestBody Student student)
     {
@@ -89,7 +90,7 @@ public class StudentController {
 
     //Spring Boot rest api that handles HTTP PUT request - updating existing resource
 //    http://localhost:8080/students/1/update
-    @PutMapping("students/{id}/update")
+    @PutMapping("/{id}/update")
     public Student updateStudent(@RequestBody Student student, @PathVariable("id") int studentId)
     {
             System.out.println(student.getFirstName());
@@ -99,7 +100,7 @@ public class StudentController {
 
     //Spring Boot rest api that handles HTTP DELETE request - updating existing resource
 //    http://localhost:8080/students/1/update
-    @DeleteMapping("students/{id}/delete")
+    @DeleteMapping("/{id}/delete")
     public String deleteStudent(@PathVariable("id") int studentId)
     {
         return  "Student Deleted Successfully with Id "+studentId;
