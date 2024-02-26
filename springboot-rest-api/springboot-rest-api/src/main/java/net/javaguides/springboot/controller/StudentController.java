@@ -3,6 +3,7 @@ package net.javaguides.springboot.controller;
 import net.javaguides.springboot.bean.Student;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 
@@ -43,13 +44,37 @@ public class StudentController {
     //SpringBoot REST API with PathVariable with Multiple Columns
 
     @GetMapping("students/{id}/{firstName}/{lastName}")
-    public Student studentpathVariableWithdifferentColumn(
-       @PathVariable("id") int studentId,
-       @PathVariable("firstName") String firstName,
+    public Student studentpathVariableWithdifferentColumn(@PathVariable("id") int studentId, @PathVariable("firstName") String firstName,
        @PathVariable("lastName") String lastName)
     {
 
         return new Student(studentId, firstName, lastName);
 
     }
+
+
+    //Springboot REST API with Request Param
+
+    //http://localhost:8080/students/query?id=1
+    @GetMapping("students/querychange")
+    public Student studentRequestVariable(@RequestParam int id)
+    {
+        return new Student(id, "Siddu", "Jaiswal");
+    }
+
+    //Springboot REST API with Multiple Request Param
+
+    //http://localhost:8080/students/query?id=1&firstName=Siddhu&lastName=Jaiswal
+    @GetMapping("students/query")
+    public Student studentRequestVariableWithMultipleQuery(@RequestParam int id,
+                                                           @RequestParam String firstName,
+                                                           @RequestParam String lastName)
+
+    {
+        return new Student(id, firstName, lastName);
+    }
+
+
+
+
 }
