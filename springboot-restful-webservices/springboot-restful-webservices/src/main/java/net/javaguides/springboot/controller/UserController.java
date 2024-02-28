@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 
 @AllArgsConstructor
@@ -35,6 +37,15 @@ public class UserController {
     {
       User user =  userService.getUserById(userId);
         return  new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+
+    //Build REST API to get all users
+    @GetMapping("/allUsers")
+    public ResponseEntity<List<User>> getAllUsers()
+    {
+      List<User> users = userService.getAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
 }
