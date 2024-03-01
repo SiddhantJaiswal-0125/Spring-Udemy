@@ -8,8 +8,10 @@ import net.javaguides.springboot.repository.UserRepository;
 import net.javaguides.springboot.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -33,25 +35,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(Long userId) {
+    public UserDto getUserById(Long userId) {
         Optional<User> optionalUser =  userRepository.findById(userId);
-        return optionalUser.get();
+
+
+        UserDto userDto = UserMapper.mapToUserDto(optionalUser.get());
+        return userDto;
+
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
+    public List<UserDto> getAllUsers() {
+        List<User> allUsers =  userRepository.findAll();
+
+        List<UserDto> allUserDto = new ArrayList<>();
+        return  allUsers.stream().map(UserMapper::mapToUserDto).collect(Collectors.toList());
+     }
 
     @Override
-    public User updateUser(User user) {
+    public UserDto updateUser(UserDto user) {
         User currentUser = userRepository.findById(user.getId()).get();
 
         currentUser.setFirstName(user.getFirstName());
         currentUser.setLastName(user.getLastName());
         currentUser.setEmail(user.getEmail());
-        return  userRepository.save(currentUser);
-
+        User savedUser =  userRepository.save(currentUser);
+        return  UserMapper.mapToUserDto(savedUser);
 
     }
 

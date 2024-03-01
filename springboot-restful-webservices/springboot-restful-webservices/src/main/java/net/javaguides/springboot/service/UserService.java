@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface UserService {
     UserDto createUser(UserDto user);
-    User getUserById(Long userId);
-    List<User> getAllUsers();
+    UserDto getUserById(Long userId);
+    List<UserDto> getAllUsers();
 
-    User updateUser(User user);
+    UserDto updateUser(UserDto user);
 
     void deleteUser(Long userId);
 }

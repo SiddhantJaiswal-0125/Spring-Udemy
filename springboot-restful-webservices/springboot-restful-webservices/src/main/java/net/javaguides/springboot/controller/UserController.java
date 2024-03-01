@@ -34,30 +34,30 @@ public class UserController {
     //build get user by ID
     //http://localhost:8080/api/users/getuser/1
     @GetMapping("/getuser/{id}")
-    public  ResponseEntity<User> getUserById(@PathVariable("id") Long userId)
+    public  ResponseEntity<UserDto> getUserById(@PathVariable("id") Long userId)
     {
-      User user =  userService.getUserById(userId);
-        return  new ResponseEntity<>(user, HttpStatus.OK);
+      UserDto userDto =  userService.getUserById(userId);
+        return  new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
 
     //Build REST API to get all users
     @GetMapping("/allUsers")
-    public ResponseEntity<List<User>> getAllUsers()
+    public ResponseEntity<List<UserDto>> getAllUsers()
     {
-      List<User> users = userService.getAllUsers();
+      List<UserDto> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
 
     //Build Update User REST API
     @PutMapping("/update/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable("id") Long userId, @RequestBody User user)
+    public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long userId, @RequestBody UserDto userDto)
     {
 
-        user.setId(userId);
-      User updatedUser =   userService.updateUser(user);
-        return  new ResponseEntity<>(user, HttpStatus.OK);
+        userDto.setId(userId);
+      UserDto updatedUser =   userService.updateUser(userDto);
+        return  new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
 
