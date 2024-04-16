@@ -5,6 +5,7 @@ import net.javaguides.todo.dto.TodoDto;
 import net.javaguides.todo.service.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class TodoController {
     // Build Add Todo REST API
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<TodoDto> addTodo(@RequestBody TodoDto todoDto)
     {
        TodoDto savedTodo= todoService.addTodo(todoDto);
@@ -46,6 +48,7 @@ public class TodoController {
 
     //Build Update Todo REST API
     @PutMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<TodoDto> updateTodo(@RequestBody TodoDto todoDto,@PathVariable Long id)
     {
         TodoDto UpdatedTodoDto = todoService.updateTodo(todoDto, id);
